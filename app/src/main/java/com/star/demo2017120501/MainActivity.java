@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,18 +88,22 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try {
-                            JSONObject obj = new JSONObject(response);
-                            JSONArray array = obj.getJSONArray("results");
-                            JSONObject obj1 = array.getJSONObject(0);
-                            double result = obj1.getDouble("elevation");
-                            tv.setText(String.valueOf(result));
+                        //Json
+//                        try {
+//                            JSONObject obj = new JSONObject(response);
+//                            JSONArray array = obj.getJSONArray("results");
+//                            JSONObject obj1 = array.getJSONObject(0);
+//                            double result = obj1.getDouble("elevation");
+//                            tv.setText(String.valueOf(result));
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
 
+                        //Gson
+                        Gson gson = new Gson();
+                        Elevation ele = gson.fromJson(response, Elevation.class);
 
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        tv.setText(String.valueOf(ele.results[0].elevation));
 
                     }
                 }, new Response.ErrorListener() {
