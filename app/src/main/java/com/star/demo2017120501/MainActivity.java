@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     {
         Geocoder geocoder = new Geocoder(MainActivity.this);
         try {
-            List<Address> list = geocoder.getFromLocation(24.918876, 121.183974, 3);
+            List<Address> list = geocoder.getFromLocation(24.9187886, 121.1839628, 3);
             Address addr = list.get(0);
             String str = addr.getAddressLine(0);
             tv.setText(str);
